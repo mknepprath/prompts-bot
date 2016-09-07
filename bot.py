@@ -9,10 +9,6 @@ import tweepy
 class TwitterAPI:
     """
     Class for accessing the Twitter API.
-
-    Requires API credentials to be available in environment
-    variables. These will be set appropriately if the bot was created
-    with init.sh included with the heroku-twitterbot-starter
     """
     def __init__(self):
         consumer_key = os.environ.get('TWITTER_CONSUMER_KEY')
@@ -38,7 +34,8 @@ def getPrompt():
         offset = str(random.choice(range(getTotal() - 1)))
         dictionary = urlopen('https://api.pearson.com/v2/dictionaries/ldoce5/entries?offset=' + offset + '&limit=1&apikey=' + os.environ.get('DICT_CONSUMER_KEY')).read().decode('utf8')
         dictData = json.loads(dictionary)
-    return dictData['results'][0]['headword']
+        prompt = dictData['results'][0]['headword']
+    return prompt
 
 if __name__ == "__main__":
     twitter = TwitterAPI()
