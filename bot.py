@@ -32,7 +32,7 @@ if __name__ == "__main__":
     print dictionary
 
     url = urlopen(dictionary)
-    print url
+    print url.read()
 
     result = json.loads(dictionary)
     print result
