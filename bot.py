@@ -28,6 +28,7 @@ class TwitterAPI:
 if __name__ == "__main__":
     twitter = TwitterAPI()
     dictionary = 'https://api.pearson.com/v2/dictionaries/ldoce5/entries?headword=test&apikey=' + os.environ.get('DICT_CONSUMER_KEY')
+    print dictionary
 
     result = json.loads(dictionary)
     print result
