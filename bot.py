@@ -24,9 +24,9 @@ class TwitterAPI:
         self.api.update_status(status=message)
 
 def getTotal():
-    FIRST_WORD = urlopen('https://api.pearson.com/v2/dictionaries/ldoce5/entries?offset=0&limit=1&apikey=' + os.environ.get('DICT_CONSUMER_KEY')).read().decode('utf8')
-    FIRST_WORD_DATA = json.loads(FIRST_WORD)
-    return FIRST_WORD_DATA['total']
+    LDOCE = urlopen('https://api.pearson.com/v2/dictionaries/ldoce5/entries?apikey=' + os.environ.get('DICT_CONSUMER_KEY')).read().decode('utf8')
+    LDOCE_DATA = json.loads(LDOCE)
+    return LDOCE_DATA['total']
 
 def getPrompt():
     prompt = ''
