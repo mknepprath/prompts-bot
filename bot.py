@@ -28,10 +28,12 @@ class TwitterAPI:
         self.api.update_status(status=message)
 
 def getPrompt():
-    offset = str(random.choice(range(305423)))
-    dictionary = urlopen('https://api.pearson.com/v2/dictionaries/entries?offset=' + offset + '&limit=1&apikey=' + os.environ.get('DICT_CONSUMER_KEY')).read().decode('utf8')
-    dictData = json.loads(dictionary)
-    return dictData['results'][0]['headword']
+    while not prompt.islower():
+        offset = str(random.choice(range(305423)))
+        dictionary = urlopen('https://api.pearson.com/v2/dictionaries/entries?offset=' + offset + '&limit=1&apikey=' + os.environ.get('DICT_CONSUMER_KEY')).read().decode('utf8')
+        dictData = json.loads(dictionary)
+        prompt = dictData['results'][0]['headword']
+    return prompt
 
 
 def log(rec, s):
