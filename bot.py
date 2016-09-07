@@ -33,7 +33,7 @@ if __name__ == "__main__":
     dictionary = urlopen('https://api.pearson.com/v2/dictionaries/ldoce5/entries?offset=' + offset + '&apikey=' + os.environ.get('DICT_CONSUMER_KEY')).read().decode('utf8')
 
     dictData = json.loads(dictionary)
-    print dictData['results']
+    print dictData['results'][0]['headword']
 
     #twitter.tweet("Hello world!") #You probably want to remove this line
     #while True:
