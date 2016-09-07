@@ -27,7 +27,7 @@ class TwitterAPI:
         """Send a tweet"""
         self.api.update_status(status=message)
 
-def getPrompt:
+def getPrompt():
     offset = str(random.choice(range(305423)))
     dictionary = urlopen('https://api.pearson.com/v2/dictionaries/entries?offset=' + offset + '&limit=1&apikey=' + os.environ.get('DICT_CONSUMER_KEY')).read().decode('utf8')
     dictData = json.loads(dictionary)
@@ -46,7 +46,7 @@ def log(rec, s):
 if __name__ == "__main__":
     twitter = TwitterAPI()
     prompt = getPrompt()
-    console.log(prompt)
+    print prompt
 
     #twitter.tweet("Hello world!") #You probably want to remove this line
     #while True:
