@@ -27,13 +27,26 @@ class TwitterAPI:
         """Send a tweet"""
         self.api.update_status(status=message)
 
+def getPrompt:
+    offset = str(random.choice(range(305423)))
+    dictionary = urlopen('https://api.pearson.com/v2/dictionaries/entries?offset=' + offset + '&limit=1&apikey=' + os.environ.get('DICT_CONSUMER_KEY')).read().decode('utf8')
+    dictData = json.loads(dictionary)
+    return dictData['results'][0]['headword']
+
+
+def log(rec, s):
+    if rec:
+        cur.execute("INSERT INTO console (log, time) VALUES (%s, 'now')", (str(s),))
+        conn.commit()
+        print str(s)
+        return
+    else:
+        pass
+
 if __name__ == "__main__":
     twitter = TwitterAPI()
-    offset = str(random.choice(range(305423))) # should be number of words in dictionary
-    dictionary = urlopen('https://api.pearson.com/v2/dictionaries/entries?offset=' + offset + '&limit=1&apikey=' + os.environ.get('DICT_CONSUMER_KEY')).read().decode('utf8')
-
-    dictData = json.loads(dictionary)
-    print dictData['results'][0]['headword']
+    prompt = getPrompt()
+    console.log(prompt)
 
     #twitter.tweet("Hello world!") #You probably want to remove this line
     #while True:
