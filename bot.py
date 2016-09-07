@@ -29,8 +29,8 @@ class TwitterAPI:
 
 if __name__ == "__main__":
     twitter = TwitterAPI()
-    offset = str(random.choice(range(57964))) # should be number of words in dictionary
-    dictionary = urlopen('https://api.pearson.com/v2/dictionaries/ldoce5/entries?offset=' + offset + '&limit=1&apikey=' + os.environ.get('DICT_CONSUMER_KEY')).read().decode('utf8')
+    offset = str(random.choice(range(305423))) # should be number of words in dictionary
+    dictionary = urlopen('https://api.pearson.com/v2/dictionaries/entries?offset=' + offset + '&limit=1&apikey=' + os.environ.get('DICT_CONSUMER_KEY')).read().decode('utf8')
 
     dictData = json.loads(dictionary)
     print dictData['results'][0]['headword']
