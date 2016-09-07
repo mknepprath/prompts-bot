@@ -27,15 +27,19 @@ class TwitterAPI:
         """Send a tweet"""
         self.api.update_status(status=message)
 
+def getTotal():
+    FIRST_WORD = urlopen('https://api.pearson.com/v2/dictionaries/ldoce5/entries?offset=0&limit=1&apikey=' + os.environ.get('DICT_CONSUMER_KEY')).read().decode('utf8')
+    FIRST_WORD_DATA = json.loads(FIRST_WORD)
+    return FIRST_WORD_DATA['total']
+
 def getPrompt():
     prompt = ''
     while not prompt.islower():
-        offset = str(random.choice(range(57964)))
+        offset = str(random.choice(range(getTotal() - 1)))
         dictionary = urlopen('https://api.pearson.com/v2/dictionaries/ldoce5/entries?offset=' + offset + '&limit=1&apikey=' + os.environ.get('DICT_CONSUMER_KEY')).read().decode('utf8')
         dictData = json.loads(dictionary)
         print dictData
         prompt = dictData['results'][0]['headword']
-        print dictData['total']
         print prompt
     return prompt
 
