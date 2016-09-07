@@ -36,6 +36,6 @@ if __name__ == "__main__":
     print dictData['results']
 
     #twitter.tweet("Hello world!") #You probably want to remove this line
-    while True:
+    #while True:
         #Send a tweet here!
         #time.sleep(60)
