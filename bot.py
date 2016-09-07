@@ -35,6 +35,7 @@ def getPrompt():
         dictData = json.loads(dictionary)
         print dictData
         prompt = dictData['results'][0]['headword']
+        print dictData['total']
         print prompt
     return prompt
 
