@@ -30,7 +30,7 @@ def getTotal():
 
 def getPrompt():
     prompt = ''
-    while not prompt.islower() or ' ' in prompt or not [:1].isalpha():
+    while not prompt.islower() or ' ' in prompt or not prompt[:1].isalpha():
         offset = str(random.choice(range(getTotal() - 1)))
         dictionary = urlopen('https://api.pearson.com/v2/dictionaries/ldoce5/entries?offset=' + offset + '&limit=1&apikey=' + os.environ.get('DICT_CONSUMER_KEY')).read().decode('utf8')
         dictData = json.loads(dictionary)
