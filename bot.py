@@ -35,6 +35,7 @@ def getPrompt():
         offset = str(random.choice(range(getTotal() - 1)))
         dictionary = urlopen('https://api.pearson.com/v2/dictionaries/ldoce5/entries?offset=' + offset + '&limit=1&apikey=' + os.environ.get('DICT_CONSUMER_KEY')).read().decode('utf8')
         dictData = json.loads(dictionary)
+        console.log(dictData['results'][0])
         prompt = dictData['results'][0]['headword']
     return prompt
 
@@ -43,4 +44,4 @@ if __name__ == "__main__":
     prompt = getPrompt()
     print 'prompt: ' + prompt
 
-    twitter.tweet(prompt)
+    # twitter.tweet(prompt)
