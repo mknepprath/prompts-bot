@@ -1,15 +1,15 @@
 import os
-import time
 import json
 import random
-from urllib import urlopen
 
 import tweepy
+
 
 class TwitterAPI:
     """
     Class for accessing the Twitter API.
     """
+
     def __init__(self):
         consumer_key = os.environ.get('TWITTER_CONSUMER_KEY')
         consumer_secret = os.environ.get('TWITTER_CONSUMER_SECRET')
@@ -23,24 +23,17 @@ class TwitterAPI:
         """Send a tweet"""
         self.api.update_status(status=message)
 
-def getTotal():
-    LDOCE = urlopen('https://api.pearson.com/v2/dictionaries/ldoce5/entries?apikey=' + os.environ.get('DICT_CONSUMER_KEY')).read().decode('utf8')
-    LDOCE_DATA = json.loads(LDOCE)
-    return LDOCE_DATA['total']
 
-def getPrompt():
-    prompt = ''
-    # Loop til prompt is all lowercase, has no spaces, and starts with a letter
-    while not prompt.islower() or ' ' in prompt or not prompt[:1].isalpha():
-        offset = str(random.choice(range(getTotal() - 1)))
-        dictionary = urlopen('https://api.pearson.com/v2/dictionaries/ldoce5/entries?offset=' + offset + '&limit=1&apikey=' + os.environ.get('DICT_CONSUMER_KEY')).read().decode('utf8')
-        dictData = json.loads(dictionary)
-        prompt = dictData['results'][0]['headword']
-    return prompt
+def main():
+    twitter = TwitterAPI()
+
+    offset = random.choice(range(178186))
+    words = json.load(open('words.json'))
+    prompt = words[offset]
+
+    print('prompt: ' + prompt)
+    twitter.tweet(prompt)
+
 
 if __name__ == "__main__":
-    twitter = TwitterAPI()
-    prompt = getPrompt()
-    print 'prompt: ' + prompt
-
-    twitter.tweet(prompt)
+    main()
