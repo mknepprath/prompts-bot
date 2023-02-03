@@ -3,6 +3,7 @@ import json
 import random
 
 import tweepy
+from mastodon import Mastodon
 
 
 class TwitterAPI:
@@ -25,15 +26,22 @@ class TwitterAPI:
 
 
 def main():
-    twitter = TwitterAPI()
-
-    offset = random.choice(range(178186))
+    offset = random.choice(range(9998))
     words = json.load(open('words.json'))
     prompt = words[offset]
 
     print('prompt: ' + prompt)
-    twitter.tweet(prompt)
 
+    mastodon = Mastodon(
+        api_base_url='https://botsin.space',
+        client_id=os.environ.get('MASTODON_CLIENT_KEY'),
+        client_secret=os.environ.get('MASTODON_CLIENT_SECRET'),
+        access_token=os.environ.get('MASTODON_ACCESS_TOKEN'),
+    )
+    mastodon.status_post(status=prompt)
+
+    twitter = TwitterAPI()
+    twitter.tweet(prompt)
 
 if __name__ == "__main__":
     main()
