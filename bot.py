@@ -13,7 +13,7 @@ def main():
     print('prompt: ' + prompt)
 
     mastodon = Mastodon(
-        api_base_url='https://botsin.space',
+        api_base_url=os.environ.get('MASTODON_BASE_URL'),
         client_id=os.environ.get('MASTODON_CLIENT_KEY'),
         client_secret=os.environ.get('MASTODON_CLIENT_SECRET'),
         access_token=os.environ.get('MASTODON_ACCESS_TOKEN'),
