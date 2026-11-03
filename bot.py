@@ -1,14 +1,16 @@
 import os
 import json
 import random
+import re
 
 from mastodon import Mastodon
 
 
 def main():
-    offset = random.choice(range(9998))
     words = json.load(open('words.json'))
-    prompt = words[offset]
+    # Skip fragments like "macro-" (issue #5).
+    words = [w for w in words if re.search(r'[A-Za-z]\Z', w)]
+    prompt = random.choice(words)
 
     print('prompt: ' + prompt)
 
